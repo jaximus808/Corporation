@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <link rel="stylesheet" href = "style.css">
+        <title>Corporation</title>
+    </head>
+    <body>
+        <div class="contentBody">
+            
+            <h1>Corporation</h1>
+            <h2>Create A Game</h2>
+            <p>Max Players (max 10 Players, minimum 3 Players):  </p>
+            <input autocomplete="off" id="settingsMaxPlayers">
+            <p id="statusReg"></p>
+            <button onclick="registergame()">Create Game</button>
+            <h2>Join Game</h2>
+            <p>Game Code:</p>
+            <input autocomplete="off">
+            <p id="statusJoin"></p>
+            <button onclick="joingame()">Join Game</button>
+        </div>
+        <script>
+            const registergame = () =>
+            {
+                fetch(location.protocol+"//"+window.location.host+"/management/registerGame", {
+                    method:"POST",
+                    headers:
+                    {
+                        "Content-Type":"application/json"
+                    },
+                    mode:"cors",
+                    body: JSON.stringify(
+                        {
+                            playerSet: parseInt(document.getElementById("settingsMaxPlayers").value)
+                        }
+                    )
+                }).then(res=> res.json()).then(data =>
+                {
+                    if(data.error)
+                    {
+                        document.getElementById("statusReg").innerHTML = data.message; 
+                        return; 
+                    }
+                    window.location.href = `/game/gameroom/${data.message}`
+                })
+            }
+        </script>
+    </body>
+</html>
