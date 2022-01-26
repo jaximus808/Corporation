@@ -1,6 +1,6 @@
 class Player
 {
-    constructor(name, id, state, pieceIconId)
+    constructor(name, id, state, pieceIconId,host)
     {
         this.name = name;
         this.id = id; 
@@ -8,6 +8,8 @@ class Player
         this.state = state; 
         this.money = 0
         this.pieceIcon = pieceIconId
+        this.host = host
+        this.position = 0; 
     }
 }
 

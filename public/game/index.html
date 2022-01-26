@@ -8,12 +8,28 @@
         <link rel="stylesheet" href = "style.css">
     </head>
     <body> 
+        <div id="playerDisplayerContainer">
+            <h2>Players</h2>
+            <div id="playerDisplayer"></div>
+        </div>
+        <div id="chatArea" style="width: 20%; height: 100%; background-color: rgba(186, 186, 186,0.4); position: absolute; right: 0px;z-index: 5;">
+            <div id="chatContianer" style="background-color: rgb(186, 186, 186); width:98%; height:90%; margin-left: 1% ;margin-top: 1% ;"  id="chatContianer"></div>
+                <div id="inputArea" style="height:8%; width:98%; margin-left:1%;margin-top: 2%;">
+                    <input id="chatinput">
+                    
+                </div>
+              
+            <!-- <button onclick="SendMessageDOM()" class="btn">Send</button> -->
+            </div>
+          </div>
         <div id="initSettings">
             <div id="initContent">
                 <p>username:</p>
-            <input id="username">
-            
+            <input autocomplete="off" id="username">
+            <p>icon id:</p>
+            <input id="iconId"autocomplete="off">
             <button onclick="JoinGame()">join</button>
+            <p id="status"></p>
             </div>
             
         </div> 
