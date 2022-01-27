@@ -40,7 +40,6 @@ class GameLogic
             type:1, 
             act: (id) =>
             {
-                this.players[id].money += 200; 
             }
         },
         {
@@ -60,7 +59,7 @@ class GameLogic
         {
             name: "Games R Us",
             type:0,
-            property: new this.Property("Games R Us", 70, 100, 10, 9, 30, 2)
+            property: new this.Property("Games R Us", 70, 100, 10, 9, 30, 2),
         },
         {
             name: "Sick Tax",
@@ -93,10 +92,19 @@ class GameLogic
         if(movePlayer.state == 2) return this.ServerMessage("You are out lmfao")
         var dice = this.Roll(); 
         this.players[id].position += dice[0]+dice[1]
+        
         if(this.players[id].position > 39) 
         {
+            this.players[id].money += 200;
             this.players[id].position -= 40; 
         }
+        //remove this if statement later when all pieces added
+        if(this.boardPieces[this.players[id].position])
+        {
+            if(this.boardPieces[this.players[id].position].type == 0) this.boardPieces[this.players[id].position].act(id)
+            else this.boardPieces[this.players[id].position].property.act(id, this.players) 
+        }
+        //need to check for bankrupt
         this.ServerMessage(`You rolled a ${dice[0]} and a ${dice[1]}!`);
         this.UpdateState([[this.players[id].name, this.players[id].position, this.players[id].money, this.players[id].state]], [])
     }

@@ -22,13 +22,17 @@ class Property
         this.baseRent = baseRent; 
         this.owner = "not set"; 
         this.state = state;
-        
+        this.houseCount = 0; 
         //0: purchasable, 1: owned
     }
 
-    Act()
+    act(id, players )
     {
-        console.log("test")
+        if(this.state == 1 && id != this.owner) 
+        {
+            if(this.houseCount == 0) players[id].money -= this.baseRent;       
+            else players[id].money -= this.houseTax*this.houseCount*this.multiplier; 
+        }
     }
 
 }
